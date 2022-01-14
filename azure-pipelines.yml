@@ -1,0 +1,22 @@
+trigger:
+ branches:
+  include:
+    - main
+ paths:
+   include:
+     - src/Blazored.Modal
+
+pool: 'Default'
+
+name: $(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
+
+resources: 
+  repositories:
+   - repository: CoreTemplates
+     type: git
+     name: 'Ascenti Digital/CoreTemplates'
+
+stages:
+- template: Default-NugetPackage-Build-Publish.yml@CoreTemplates
+  parameters:
+    projectName: 'Blazored.Modal.csproj' 
